@@ -1,31 +1,75 @@
 <?php
 
-require_once('../inc/header.php');
-if (isset($_SESSION['nombre'])){
-require_once('../inc/menu_manager.php');
-require_once('../inc/cabecera_contenido.php');
-require_once('../../models/conexion.php');
-require_once('../../models/ticket_users.php');
-require_once('../../facades/facadeTicketUsers.php');
-$consulta = new TicketUsers();
-$idCompania = $_SESSION['idCompania'];
-$idCc = $_SESSION["idCc"];
-?>
+  require_once('../inc/header.php');
+  if (isset($_SESSION['nombre'])){
+  require_once('../inc/menu_administrador.php');
+  require_once('../inc/cabecera_contenido.php');
+  require_once('../../models/conexion.php');
+  require_once('../../models/services.php');
+  require_once('../../facades/facade_service.php');
+  require_once('../../vendor/dompdf/dompdf_config.inc.php');
+
+  $consulta = new Services();
+  $idCc = $_SESSION["idCc"];
+
+   ?>
 <!-- Page content -->
 <div id="page-content">
     <!-- Table Responsive Header -->
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="gi gi-iphone"></i>Usuarios Registrados<br><small>Aquí podras ver todos los usuarios registrados en el sistema!</small>
+                <i class="gi gi-iphone"></i>Servicios Registrados<br><small>Aquí podras ver todos los servicios registrados en el sistema!</small>
             </h1>
         </div>
     </div>
     <ul class="breadcrumb breadcrumb-top">
         <li>Tabla</li>
-        <li><a href="">Consulta de usuarios</a></li>
+        <li><a href="">Consulta de los servicios</a></li>
     </ul>
     <!-- END Table Responsive Header -->
+    <div class="row">
+
+      <div class="col-md-12">
+        <div class="block">
+          <div class="block-title">
+            <h2><strong>Buscar por mes</strong></h2>
+          </div>
+        <div class="form-group">
+          <form id="form-validation" class="form-horizontal form-bordered" action="../../controllers/administrador/servicesXMesController.php" method="post">
+            <div class="form-group">
+              <div class="col-md-12 control-label">
+                <label class="col-md-4 control-label" for="mes">Mes</label>
+                <div class="col-md-4">
+                <select class="form-control" name="mes" id="mes">
+                  <option value=""disabled selected>Seleccione Mes</option>;
+                  <option value="1">Enero</option>
+                  <option value="2">Febrero</option>
+                  <option value="3">Marzo</option>
+                  <option value="4">Abril</option>
+                  <option value="5">Mayo</option>
+                  <option value="6">Junio</option>
+                  <option value="7">Julio</option>
+                  <option value="8">Agosto</option>
+                  <option value="9">Septiembre</option>
+                  <option value="10">Octubre</option>
+                  <option value="11">Noviembre</option>
+                  <option value="12">Diciembre</option>
+                </select>
+              </div>
+              </div>
+            </div>
+              <div class="form-group ">
+                <div class="col-md-8 col-md-offset-4">
+                  <button href="" type="submit" class="btn btn-sm btn-success"><i class="fa fa-arrow-right"></i>Buscar</button>
+                  <button id="btn-eliminar" type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Limpiar</button>
+                </div>
+              </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Responsive Full Block -->
     <div class="block full">
@@ -34,27 +78,39 @@ $idCc = $_SESSION["idCc"];
           <!--  <div class="block-options pull-right">
                 <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Configuración"><i class="fa fa-cog"></i></a>
             </div> -->
-            <h2><strong>Todos</strong> Los Usuarios</h2> <a href="crearUsuarioReport.php"><i class="fa fa-plus"></i>Crear Nuevo Usuario</a>
+            <h2><strong>Todos</strong> Los servicios</h2>
         </div>
         <!-- END All Orders Title -->
 
         <!-- All Orders Content -->
-        <table id="example-datatable" class="table table-bordered table-striped table-vcenter">
+        <div class="table-responsive remove-margin-bottom">
+        <table id="ecom-orders" class="table table-bordered table-striped table-vcenter">
             <thead>
                 <tr>
-                    <th class="text-center" style="width: 100px;">ID</th>
-                    <th class="text-center">Nombre</th>
-                    <th class="text-center">Email</th>
-                    <th class="text-center">Móvil</th>
-                    <th class="text-center">Acciones</th>
+                    <th class="text-center">Vale</th>
+                    <th class="text-center">Fecha inicio</th>
+                    <th class="text-center">Fecha fin</th>
+                    <th class="text-center">Usuario</th>
+                    <th class="text-center">Placa</th>
+                    <th class="text-center">Dirección</th>
+                    <th class="text-center">Barrio</th>
+                    <th class="text-center">Unt</th>
+                    <th class="text-center">Aer</th>
+                    <th class="text-center">Noct</th>
+                    <th class="text-center">PP</th>
+                    <th class="text-center">Valor</th>
+                    <th class="text-center">Motivo</th>
+                    <th class="text-center">Destino</th>
+                    <th class="text-center">Calificación</th>
+
                 </tr>
             </thead>
             <tbody>
-
-                <?php echo listUsariosXCentrosCostos($idCompania, $idCc); ?>
+                <?php echo listServices(); ?>
     <!-- END Responsive Full Block -->
   </tbody>
 </table>
+</div>
 <!-- END All Orders Content -->
 
 
@@ -148,20 +204,14 @@ $idCc = $_SESSION["idCc"];
     <?php
     require_once('../inc/footer.php');
     require_once('../inc/script.php');?>
-    <script src="../dis/js/pages/tablesDatatables.js"></script>
-    <script>$(function(){ TablesDatatables.init(); });</script>
-    <!-- Load and execute javascript code used only in this page -->
-    <script src="../dis/js/pages/uiProgress.js"></script>
-    <script>$(function(){ UiProgress.init(); });</script>
+    <script src="../dis/js/paneladministracion.js"></script>
+    <script src="../dis/js/pages/ecomOrders.js"></script>
+    <script>$(function(){ EcomOrders.init(); });</script>
 
 
-
-<?php
-require_once('../inc/fin_template.php');
-} else{
-  header("Location: ../mensajes/error_autenticacion.html");
-}
-
-
-
- ?>
+    <?php
+    require_once('../inc/fin_template.php');
+  } else{
+    header("Location: ../mensajes/error_autenticacion.html");
+  }
+     ?>

@@ -1,7 +1,8 @@
 <?php
   session_start();
-  $rol = $_SESSION['idRol'];
-   ?>
+  $rol = $_SESSION['estado'];
+
+  ?>
    <!DOCTYPE html>
    <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
    <!--[if IE 9]>         <html class="no-js lt-ie10"> <![endif]-->
@@ -10,10 +11,10 @@
        <head>
            <meta charset="utf-8">
 
-           <title>University Test</title>
+           <title>TaxisYa</title>
 
-           <meta name="description" content="Sigte">
-           <meta name="author" content="Integer-Soft">
+           <meta name="description" content="">
+           <meta name="author" content="Wildcatsoft">
            <meta name="robots" content="noindex, nofollow">
 
            <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
@@ -47,27 +48,19 @@
            <div class="error-options">
                <h3><i class="fa fa-chevron-circle-left text-muted"></i> <?php
                switch ($rol) {
-               case '1':
+               case 'root':
                   echo '<a href="../SuperAdministrador/home.php">Regresar</a></h3>';
                  break;
-                 case '2':
-                    echo '<a href="../Administrador/home.php">Regresar</a></h3>';
+                 case 'admin':
+                    echo '<a href="../administrador/home.php">Regresar</a></h3>';
                    break;
-                   case '3':
-                      echo '<a href="../Rector/home.php">Regresar</a></h3>';
+                   case 'manager':
+                      echo '<a href="../manager/home.php">Regresar</a></h3>';
                      break;
-                     case '4':
-                        echo '<a href="../Coordinador/home.php">Regresar</a></h3>';
+                     case 'report':
+                        echo '<a href="../report/home.php">Regresar</a></h3>';
                        break;
-                       case '5':
-                          echo '<a href="../JefeArea/home.php">Regresar</a></h3>';
-                         break;
-                         case '6':
-                            echo '<a href="../Docente/home.php">Regresar</a></h3>';
-                           break;
-                           case '7':
-                              echo '<a href="../Estudiante/home.php">Regresar</a></h3>';
-                             break;
+
 
                default:
                    echo '<a href="error.html">Regresar</a></h3>';
@@ -79,7 +72,7 @@
            <div class="row">
                <div class="col-sm-8 col-sm-offset-2 text-center">
                    <h1 class="animation-pulse"><i class="fa fa-close text-danger"></i></h1>
-                   <h2 class="h3">¡ERROR! <br>El estudiante ya esta asignado aun salon.</h2>
+                   <h2 class="h3">¡ERROR! <br>Lo sentimos ocurrio un error. <br> El correo o el número teléfonico ya esta asociado a un usuario del sistema</h2>
 
                </div>
            </div>

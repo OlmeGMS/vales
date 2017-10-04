@@ -42,7 +42,7 @@ require_once('../inc/cabecera_contenido.php');
               <label class="col-md-4 control-label" for="mes">Mes</label>
               <div class="col-md-6">
               <select class="form-control" name="mes" id="mes">
-                <option value="disabled "disabled selected>Seleccione Mes</option>';
+                <option value="disabled "disabled selected>Seleccione Mes</option>
                 <option value="1">Enero</option>
                 <option value="2">Febrero</option>
                 <option value="3">Marzo</option>

@@ -42,6 +42,22 @@ class TicketTickets{
 
   }
 
+  public function todosValesXCompania($arg_idCompania){
+    $rows = null;
+    $modelo = new Conexion();
+    $conexion = $modelo->get_conexion();
+    $sql = "select ticket_tickets.company_id, ticket_tickets.ticket, ticket_tickets.status, ticket_tickets.created_at, ticket_tickets.end_at, ticket_tickets.cost_center_id, ticket_tickets.commit from ticket_tickets where ticket_tickets.company_id = :idCompania";
+    $statement = $conexion->prepare($sql);
+    $statement->bindParam(':idCompania', $arg_idCompania);
+    $statement->execute();
+    while ($result = $statement->fetch()) {
+      $rows[] = $result;
+    }
+
+    return $rows;
+    $conexion = $modelo->close_conexion($statement, $conexion);
+  }
+
 
 }
  ?>

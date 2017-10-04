@@ -88,7 +88,7 @@ if(isset( $_SESSION["login"])){
 
     }
   }else{
-       header("Location: ../views/iniciarsesion.php");
+       header("Location: ../views/error_login.html");
   }
 }
 

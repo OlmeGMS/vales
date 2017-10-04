@@ -2,17 +2,20 @@
 
   require_once('../inc/header.php');
   if (isset($_SESSION['nombre'])){
-  require_once('../inc/menu_manager.php');
+  require_once('../inc/menu_administrador.php');
   require_once('../inc/cabecera_contenido.php');
   require_once('../../models/conexion.php');
-  require_once('../../models/services.php');
+  require_once('../../models/ticketTickets.php');
+  require_once('../../models/ticketCompanies.php');
   require_once('../../facades/facade_service.php');
   require_once('../../vendor/dompdf/dompdf_config.inc.php');
 
 
-  $consulta = new Services();
+  $consulta = new TicketTickets();
   $idCc = $_SESSION["idCc"];
-  $mes = $_GET['idmes'];
+  //$mes = $_GET['idmes'];
+
+  $idcompanies = $_SESSION['idCompania'];
 
   ?>
 <!-- Page content -->
@@ -21,16 +24,15 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="gi gi-iphone"></i>Vales Registrados<br><small>Aquí podras ver todos los vales registrados en el sistema!</small>
+                <i class="gi gi-iphone"></i>Vales<br><small>Aquí podras ver los vales en el sistema!</small>
             </h1>
         </div>
     </div>
     <ul class="breadcrumb breadcrumb-top">
         <li>Tabla</li>
-        <li><a href="">Consulta de vales</a></li>
+        <li><a href="">Consulta de Vales</a></li>
     </ul>
     <!-- END Table Responsive Header -->
-
     <!-- Responsive Full Block -->
     <div class="block full">
         <!-- All Orders Title -->
@@ -43,25 +45,20 @@
         <!-- END All Orders Title -->
 <div class="table-responsive remove-margin-bottom">
         <!-- All Orders Content -->
-        <table id="ecom-orders" class="table table-bordered table-striped table-vcenter">
+        <table id="example-datatable" class="table table-bordered table-striped table-vcenter">
             <thead>
                 <tr>
+                    <th class="text-center">Empresa</th>
                     <th class="text-center">Vale</th>
+                    <th class="text-center">Estado</th>
                     <th class="text-center">Fecha inicio</th>
                     <th class="text-center">Fecha fin</th>
-                    <th class="text-center">Usuario</th>
-                    <th class="text-center">Placa</th>
-                    <th class="text-center">Unt</th>
-                    <th class="text-center">Aer</th>
-                    <th class="text-center">Noct</th>
-                    <th class="text-center">PP</th>
-                    <th class="text-center">Valor</th>
-                    <th class="text-center">Motivo</th>
-                    <th class="text-center">Destino</th>
+                    <th class="text-center">Gerente</th>
+                    <th class="text-center">Dependencia</th>
                 </tr>
             </thead>
             <tbody>
-                <?php echo listServicesManagerMes($idCc,$mes); ?>
+                <?php echo listValesXCompania($idcompanies); ?>
     <!-- END Responsive Full Block -->
   </tbody>
 </table>
@@ -71,42 +68,11 @@
 
 
 <!-- button export PFD -->
-<div class="form-group">
+<!--<div class="form-group">
   <a href="../../controllers/reportePdfServicemesController.php?idmes=<?php echo$mes ?>" data-toggle="tooltip" title="pdf" class="btn btn-default" ><i class="fa fa-file-pdf-o"></i></a>
   <a href="../../controllers/reporteExcelServicemesController.php?idmes=<?php echo$mes ?>" data-toggle="tooltip" title="excel" class="btn btn-default" ><i class="fa fa-file-excel-o"></i></a>
-</div>
-<div class="form-group">
-  <form id="form-validation" class="form-horizontal form-bordered" action="../../controllers/manager/servicesXMesController.php" method="post">
-    <div class="form-group">
-      <div class="col-md-12 control-label">
-        <label class="col-md-4 control-label" for="mes">Mes</label>
-        <div class="col-md-4">
-        <select class="form-control" name="mes" id="mes">
-          <option value=""disabled selected>Seleccione Mes</option>;
-          <option value="1">Enero</option>
-          <option value="2">Febrero</option>
-          <option value="3">Marzo</option>
-          <option value="4">Abril</option>
-          <option value="5">Mayo</option>
-          <option value="6">Junio</option>
-          <option value="7">Julio</option>
-          <option value="8">Agosto</option>
-          <option value="9">Septiembre</option>
-          <option value="10">Octubre</option>
-          <option value="11">Noviembre</option>
-          <option value="12">Diciembre</option>
-        </select>
-      </div>
-      </div>
-    </div>
-      <div class="form-group ">
-        <div class="col-md-8 col-md-offset-4">
-          <button href="" type="submit" class="btn btn-sm btn-success"><i class="fa fa-arrow-right"></i>Buscar</button>
-          <button id="btn-eliminar" type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Limpiar</button>
-        </div>
-      </div>
-  </form>
-  </div>
+</div>-->
+
 </div>
 <!-- END All Orders Block -->
 </div>
@@ -194,13 +160,11 @@
     <?php
     require_once('../inc/footer.php');
     require_once('../inc/script.php');?>
-    <script src="../dis/js/paneladministracion.js"></script>
-    <script src="../dis/js/pages/ecomOrders.js"></script>
-    <script>$(function(){ EcomOrders.init(); });</script>
+    <script src="../dis/js/pages/tablesDatatables.js"></script>
+    <script>$(function(){ TablesDatatables.init(); });</script>
     <!-- Load and execute javascript code used only in this page -->
     <script src="js/pages/uiProgress.js"></script>
     <script>$(function(){ UiProgress.init(); });</script>
-
 
     <?php
     require_once('../inc/fin_template.php');

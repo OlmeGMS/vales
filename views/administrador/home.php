@@ -1,11 +1,9 @@
 
 <?php
-
   require_once('../inc/header.php');
   if (isset($_SESSION['nombre'])){
-  require_once('../inc/menu_manager.php');
+  require_once('../inc/menu_administrador.php');
   require_once('../inc/cabecera_contenido.php');
-
    ?>
    <!-- Page content -->
                       <div id="page-content">
@@ -16,13 +14,16 @@
                                       <a href="home.php"><i class="fa fa-cab"></i> Inicio</a>
                                   </li>
                                   <li>
-                                      <a href="javascript:void(0)"><i class="fa fa-pencil"></i> Usuario Reportes</a>
+                                      <a href="usuarioManager.php"><i class="fa fa-pencil"></i> Usuario manager</a>
                                   </li>
                                   <li>
-                                      <a href="crearVale.php"><i class="fa fa-ticket"></i> Generar vales</a>
+                                      <a href="vale.php"><i class="fa fa-ticket"></i> Vales</a>
                                   </li>
                                   <li>
-                                      <a href="buscarmes.php"><i class="fa fa-database"></i> Servicios</a>
+                                      <a href="servicios.php"><i class="fa fa-database"></i> Servicios</a>
+                                  </li>
+                                  <li>
+                                      <a href="centroCostos.php"><i class="fa fa-building"></i> Centros</a>
                                   </li>
 
                               </ul>

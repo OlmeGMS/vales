@@ -89,9 +89,16 @@
                 required: true,
                 minlength: 5
             },
+            password:{
+              required: true,
+            },
             tipo_documento:{
               required: true,
 
+            },
+            movil:{
+              required: true,
+              minlength: 7
             },
             Documento:{
               required: true
@@ -130,6 +137,12 @@
             },
             Ruta_Origen:{
                 required: true,
+            },
+            centro_costo:{
+              required: true,
+            },
+            prefijo:{
+              required: true,
             },
             licencia:{
                 required: true,
@@ -298,6 +311,9 @@
             num_contractual:{
                 required: true
             },
+            presupuesto:{
+              required: true
+            },
             num_excontractual:{
                 required: true
             },
@@ -324,6 +340,9 @@
                 minlength: 4,
                 maxlength: 45
             },
+            email:{
+              required: true,
+            },
             masked_telefono:{
                 required: true
             },
@@ -343,7 +362,7 @@
                 minlength: 'Your username must consist of at least 3 characters'
             },
             mes:{
-              required: 'Seleccione un mes';
+              required: 'Seleccione un mes',
             },
             numeroContrato: {
                 required: 'Digite el número de  contrato ej:0001',
@@ -361,6 +380,14 @@
             puertas_vehiculo:{
                 required: true
             },
+            movil:{
+              required: 'Digite el numero teléfonico',
+              minlength: 'El número debe tener mínimo 7 digitos',
+            },
+            password:{
+              required: 'Digite el password',
+            },
+
             primer_nombre:{
                 required: 'Digite el nombre del conductor',
                 minlength:'El nombre debe tener minimo tres letras',
@@ -370,6 +397,9 @@
                 required: 'Digite el  segundo nombre del conductor',
                 minlength:'El nombre debe tener minimo tres letras',
                 regexp: 'Solo se aceptan letras'
+            },
+            email:{
+              required: 'Digite el email'
             },
             primer_apellido:{
                 required: 'Digite el primer apellido del conductor',
@@ -418,6 +448,9 @@
             },
             RUT:{
                 required: 'Digite el número del rut'
+            },
+            prefijo:{
+              required: 'Digite el prefijo'
             },
             tipoCliente:{
                 required: 'Digite el tipo de cliente'
@@ -510,6 +543,9 @@
             num_excontractual:{
                 required: 'Digite el número del seguro excontractual'
             },
+            presupuesto:{
+              required: 'Digite el presupuesto'
+            },
             Codigo_Marca:{
                 required: 'Digite el codigo de la marca'
             },
@@ -562,6 +598,9 @@
             },
             nombreRazon:{
                 required: 'Digite el nombre de la razon social'
+            },
+            centro_costo:{
+              required: 'Seleccione el centro de costo'
             },
             estado:{
                 required: 'Seleccione el estado'
@@ -647,6 +686,7 @@
             $('#numero_prorroga').mask('9999');
             $('#NIT').mask('999999999');
             $('#RUT').mask('99999999999-9');
+            $('#prefijo').mask('aa');
             $('#registroMerantil').mask('999999')
             $('#tarjeta_operacion').mask('99999999')
         }

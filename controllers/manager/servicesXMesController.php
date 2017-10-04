@@ -5,9 +5,9 @@ require_once('../../models/services.php');
 $mes = $_POST['mes'];
 
 if(!empty($mes)){
-  header("Location: ../../views/manager/serviciosMangerMes.php?idmes=$mes");
+  header("Location: ../../views/manager/serviciosManagerMes.php?idmes=$mes");
 }else{
-  header("Location: ../../views/manager/serviciosMangerMes.php");
+  header("Location: ../../views/manager/servicios.php");
 }
 
 

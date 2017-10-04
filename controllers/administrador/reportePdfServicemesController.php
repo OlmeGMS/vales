@@ -1,13 +1,13 @@
 <?php
-require_once('../vendor/dompdf/dompdf_config.inc.php');
-require_once('../models/conexion.php');
-require_once('../models/services.php');
-require_once('../facades/facade_service.php');
+require_once('../../vendor/dompdf/dompdf_config.inc.php');
+require_once('../../models/conexion.php');
+require_once('../../models/services.php');
+require_once('../../facades/facade_service.php');
 
 session_start();
 $idCc = $_SESSION['idCc'];
 $mes = $_GET['idmes'];
-
+$idCompania = $_SESSION['idCompania'];
             $codigoHTML='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             <html xmlns="http://www.w3.org/1999/xhtml">
             <head>
@@ -15,7 +15,7 @@ $mes = $_GET['idmes'];
             <title>Reporte</title>
             </head>
             <body>
-            <table width="75%" border="1" cellspacing="0" cellpadding="0">
+            <table width="80%" border="1" cellspacing="0" cellpadding="0">
               <tr>
                 <td colspan="14" bgcolor="skyblue"><CENTER><strong>REPORTE DE LA TABLA VALES</strong></CENTER></td>
               </tr>
@@ -26,6 +26,7 @@ $mes = $_GET['idmes'];
               <th class="text-center">Usuario</th>
               <th class="text-center">Placa</th>
               <th class="text-center">Dirección</th>
+              <th class="text-center">Barrio</th>
               <th class="text-center">Unt</th>
               <th class="text-center">Aer</th>
               <th class="text-center">Noct</th>
@@ -36,7 +37,7 @@ $mes = $_GET['idmes'];
               </tr>';
             $consulta = new Services();
             $prefijo = $consulta->prefijo($idCc);
-            $filas = $consulta->todosServiciosMangerMes($prefijo, $mes);
+            $filas = $consulta->todosServiciosAdministradorMes($idCompania, $mes);
 
             foreach ($filas as $fila) {
               $dato1 = $fila['index_id'];
@@ -53,6 +54,7 @@ $mes = $_GET['idmes'];
               <td id="" name ="" class="text-center">'.$fila['user_name'].'</td>
               <td id="" name ="" class="text-center">'.$fila['placa'].'</td>
               <td id="" name ="" class="text-center">'.$direccion.'</td>
+              <td id="" name ="" class="text-center">'.$fila['barrio'].'</td>
               <td id="" name ="" class="text-center">'.$fila['units'].'</td>
               <td id="" name ="" class="text-center">'.$fila['charge1'].'</td>
               <td id="" name ="" class="text-center">'.$fila['charge2'].'</td>
@@ -71,7 +73,7 @@ $mes = $_GET['idmes'];
           $dompdf= new DOMPDF();
           $dompdf->load_html($codigoHTML);
           ini_set("memory_limit","150M");
-          $dompdf->set_paper('A4', 'landscape');
+          //$dompdf->set_paper('A4', 'landscape');
           $dompdf->render();
           //$pdf = $dompdf->output();
           $dompdf->stream("Reporte.pdf");

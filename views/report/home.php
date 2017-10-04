@@ -12,7 +12,7 @@ require_once('../inc/cabecera_contenido.php');
                        <div class="content-header">
                            <ul class="nav-horizontal text-center">
                                <li class="active">
-                                   <a href="home.php"><i class="fa fa-university"></i> Inicio</a>
+                                   <a href="home.php"><i class="fa fa-cab"></i> Inicio</a>
                                </li>
 
                                <li>

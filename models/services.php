@@ -6,7 +6,7 @@ class Services{
     $row = null;
     $modelo = new Conexion();
     $conexion = $modelo->get_conexion();
-    $sql = "select ticket_tickets.ticket, services.created_at, services.updated_at, services.user_name, cars.placa, services.barrio, services.units, services.charge1, services.charge2, services.charge4, services.value, services.commit, services.destination from services inner join ticket_tickets on ticket_tickets.ticket = services.user_card_reference inner join cars on services.car_id = cars.id where ticket_tickets.company_id = 9";
+    $sql = "select ticket_tickets.ticket, services.created_at, services.updated_at, services.user_name, cars.placa, services.barrio, services.units, services.charge1, services.charge2, services.charge4, services.value, services.commit, services.destination, services.index_id, services.comp1, services.comp2, services.no, services.obs, services.barrio, services.qualification from services inner join ticket_tickets on ticket_tickets.ticket = services.user_card_reference inner join cars on services.car_id = cars.id where ticket_tickets.company_id = 9";
     $statement = $conexion->prepare($sql);
     $statement->execute();
     while ($result = $statement->fetch()) {
@@ -54,7 +54,7 @@ class Services{
     $modelo = new Conexion();
     $conexion = $modelo->get_conexion();
     $prefijoa = $arg_prefijo."%";
-    $sql = "select ticket_tickets.ticket, services.created_at, services.updated_at, services.user_name, cars.placa, services.barrio, services.units, services.charge1, services.charge2, services.charge4, services.value, services.commit, services.destination from services inner join ticket_tickets on ticket_tickets.ticket = services.user_card_reference inner join cars on services.car_id = cars.id where (MONTH(services.created_at) = :mes) and (services.pay_type = 3) and (services.user_card_reference like :prefijo)";
+    $sql = "select ticket_tickets.ticket, services.created_at, services.updated_at, services.user_name, cars.placa, services.barrio, services.units, services.charge1, services.charge2, services.charge4, services.value, services.commit, services.destination, services.index_id, services.comp1, services.comp2, services.no, services.obs, services.barrio, services.qualification from services inner join ticket_tickets on ticket_tickets.ticket = services.user_card_reference inner join cars on services.car_id = cars.id where (MONTH(services.created_at) = :mes) and (services.pay_type = 3) and (services.user_card_reference like :prefijo)";
     $statement = $conexion->prepare($sql);
     $statement->bindParam(':prefijo', $prefijoa);
     $statement->bindParam(':mes', $arg_mes);
@@ -68,7 +68,26 @@ class Services{
 
   }
 
-  
+  public function todosServiciosAdministradorMes($arg_idCompania, $arg_mes){
+
+    $rows = null;
+    $modelo = new Conexion();
+    $conexion = $modelo->get_conexion();
+    $sql = "select ticket_tickets.ticket, services.created_at, services.updated_at, services.user_name, cars.placa, services.barrio, services.units, services.charge1, services.charge2, services.charge4, services.value, services.commit, services.destination,services.index_id, services.comp1, services.comp2, services.no, services.obs, services.qualification from services inner join ticket_tickets on ticket_tickets.ticket = services.user_card_reference inner join cars on services.car_id = cars.id where (MONTH(services.created_at) = :mes) and (services.pay_type = 3) and (ticket_tickets.company_id = :idCompania)";
+    $statement = $conexion->prepare($sql);
+    $statement->bindParam(':idCompania', $arg_idCompania);
+    $statement->bindParam(':mes', $arg_mes);
+    $statement->execute();
+    while ($result = $statement->fetch()) {
+
+      $rows[] = $result;
+    }
+    return $rows;
+    $conexion = $modelo->close_conexion($statement, $conexion);
+
+  }
+
+
 
 
 

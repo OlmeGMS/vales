@@ -4,7 +4,9 @@
     $idUsuario = $_SESSION['idUsuario'];
     $rol = $_SESSION['estado'];
     $idCompania = $_SESSION['idCompania'];
-    $idCentroCostos = $_SESSION['idCc']; 
+    $idCentroCostos = $_SESSION['idCc'];
+
+    
 
   // $historia = $_SESSION['historia'];
     //$foto = $_SESSION['foto'];

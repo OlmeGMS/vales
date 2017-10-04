@@ -3,12 +3,21 @@ function listServices(){
   $consulta = new Services();
   $filas = $consulta->todosServiciosCompania();
   foreach ($filas as $fila) {
+    $dato1 = $fila['index_id'];
+    $dato2 = $fila['comp1'];
+    $dato3 = $fila['comp2'];
+    $dato4 = $fila['no'];
+    $dato5 = $fila['obs'];
+
+    $direccion = $dato1.$dato2.' #'.$dato3.' - '.$dato4.' '.$dato5;
     echo '<tr>
     <td id="" name ="" class="text-center">'.$fila['ticket'].'</td>
     <td id="" name ="" class="text-center">'.$fila['created_at'].'</td>
     <td id="" name ="" class="text-center">'.$fila['updated_at'].'</td>
     <td id="" name ="" class="text-center">'.$fila['user_name'].'</td>
     <td id="" name ="" class="text-center">'.$fila['placa'].'</td>
+    <td id="" name ="" class="text-center">'.$direccion.'</td>
+    <td id="" name ="" class="text-center">'.$fila['barrio'].'</td>
     <td id="" name ="" class="text-center">'.$fila['units'].'</td>
     <td id="" name ="" class="text-center">'.$fila['charge1'].'</td>
     <td id="" name ="" class="text-center">'.$fila['charge2'].'</td>
@@ -16,6 +25,7 @@ function listServices(){
     <td id="" name ="" class="text-center">'.$fila['value'].'</td>
     <td id="" name ="" class="text-center">'.$fila['commit'].'</td>
     <td id="" name ="" class="text-center">'.$fila['destination'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['qualification'].'</td>
      </tr>';
   }
 
@@ -53,12 +63,21 @@ function listServicesManagerMes($arg_idCc, $arg_mes){
   $mes = $arg_mes;
   $filas = $consulta->todosServiciosMangerMes($prefijo, $mes);
   foreach ($filas as $fila) {
+    $dato1 = $fila['index_id'];
+    $dato2 = $fila['comp1'];
+    $dato3 = $fila['comp2'];
+    $dato4 = $fila['no'];
+    $dato5 = $fila['obs'];
+
+    $direccion = $dato1.$dato2.' #'.$dato3.' - '.$dato4.' '.$dato5;
     echo '<tr>
     <td id="" name ="" class="text-center">'.$fila['ticket'].'</td>
     <td id="" name ="" class="text-center">'.$fila['created_at'].'</td>
     <td id="" name ="" class="text-center">'.$fila['updated_at'].'</td>
     <td id="" name ="" class="text-center">'.$fila['user_name'].'</td>
     <td id="" name ="" class="text-center">'.$fila['placa'].'</td>
+    <td id="" name ="" class="text-center">'.$direccion.'</td>
+    <td id="" name ="" class="text-center">'.$fila['barrio'].'</td>
     <td id="" name ="" class="text-center">'.$fila['units'].'</td>
     <td id="" name ="" class="text-center">'.$fila['charge1'].'</td>
     <td id="" name ="" class="text-center">'.$fila['charge2'].'</td>
@@ -66,6 +85,43 @@ function listServicesManagerMes($arg_idCc, $arg_mes){
     <td id="" name ="" class="text-center">'.$fila['value'].'</td>
     <td id="" name ="" class="text-center">'.$fila['commit'].'</td>
     <td id="" name ="" class="text-center">'.$fila['destination'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['qualification'].'</td>
+     </tr>';
+  }
+
+
+}
+
+function listServicesAdministradorMes($arg_idCompania, $arg_mes){
+  $consulta = new Services();
+  //$prefijo = $consulta->prefijo($arg_idCc);
+  $idCompania = $arg_idCompania;
+  $mes = $arg_mes;
+  $filas = $consulta->todosServiciosAdministradorMes($idCompania, $mes);
+  foreach ($filas as $fila) {
+    $dato1 = $fila['index_id'];
+    $dato2 = $fila['comp1'];
+    $dato3 = $fila['comp2'];
+    $dato4 = $fila['no'];
+    $dato5 = $fila['obs'];
+
+    $direccion = $dato1.$dato2.' #'.$dato3.' - '.$dato4.' '.$dato5;
+    echo '<tr>
+    <td id="" name ="" class="text-center">'.$fila['ticket'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['created_at'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['updated_at'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['user_name'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['placa'].'</td>
+    <td id="" name ="" class="text-center">'.$direccion.'</td>
+    <td id="" name ="" class="text-center">'.$fila['barrio'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['units'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['charge1'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['charge2'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['charge4'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['value'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['commit'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['destination'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['qualification'].'</td>
      </tr>';
   }
 
@@ -77,6 +133,43 @@ function listValesXDependecia($arg_idDependencia){
   $consultaCompania = new TicketCompanies();
   $idDependencia = $arg_idDependencia;
   $filas = $consulta->todosValesXDependencia($idDependencia);
+  foreach ($filas as $fila) {
+    $estado = $fila['status'];
+    $compania = $consultaCompania->nombreCompania($fila['company_id']);
+    echo '<tr>
+    <td id="" name ="" class="text-center">'.$compania.'</td>
+    <td id="" name ="" class="text-center">'.$fila['ticket'].'</td>';
+    switch ($estado) {
+      case 0:
+        echo '<td class="text-center"><span class="label label-success">Disponible</span></td>';
+        break;
+        case 1:
+          echo '<td class="text-center"><span class="label label-info">Utilizado</span></td>';
+          break;
+          case 2:
+            echo '<td class="text-center"><span class="label label-warning">Solicitado</span></td>';
+            break;
+            case 3:
+              echo '<td class="text-center"><span class="label label-danger">Vencido</span></td>';
+              break;
+      default:
+        # code...
+        break;
+    }
+    echo '
+    <td id="" name ="" class="text-center">'.$fila['created_at'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['end_at'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['cost_center_id'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['commit'].'</td>
+     </tr>';
+  }
+}
+
+function listValesXCompania($arg_idCompania){
+  $consulta = new TicketTickets();
+  $consultaCompania = new TicketCompanies();
+  $idCompania = $arg_idCompania;
+  $filas = $consulta->todosValesXCompania($idCompania);
   foreach ($filas as $fila) {
     $estado = $fila['status'];
     $compania = $consultaCompania->nombreCompania($fila['company_id']);

@@ -2,10 +2,11 @@
 
 require_once('../inc/header.php');
 if (isset($_SESSION['nombre'])){
-require_once('../inc/menu_manager.php');
+require_once('../inc/menu_administrador.php');
 require_once('../inc/cabecera_contenido.php');
 require_once('../../models/conexion.php');
 require_once('../../models/ticket_users.php');
+require_once('../../models/TicketCostCenters.php');
 require_once('../../facades/facadeTicketUsers.php');
 $consulta = new TicketUsers();
 $idCompania = $_SESSION['idCompania'];
@@ -34,7 +35,7 @@ $idCc = $_SESSION["idCc"];
           <!--  <div class="block-options pull-right">
                 <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Configuración"><i class="fa fa-cog"></i></a>
             </div> -->
-            <h2><strong>Todos</strong> Los Usuarios</h2> <a href="crearUsuarioReport.php"><i class="fa fa-plus"></i>Crear Nuevo Usuario</a>
+            <h2><strong>Todos</strong> Los Usuarios</h2> <a href="crearUsuarioManager.php"><i class="fa fa-plus"></i>Crear Nuevo Usuario</a>
         </div>
         <!-- END All Orders Title -->
 
@@ -43,6 +44,7 @@ $idCc = $_SESSION["idCc"];
             <thead>
                 <tr>
                     <th class="text-center" style="width: 100px;">ID</th>
+                    <th class="text-center">Centro de Costo</th>
                     <th class="text-center">Nombre</th>
                     <th class="text-center">Email</th>
                     <th class="text-center">Móvil</th>
@@ -51,7 +53,7 @@ $idCc = $_SESSION["idCc"];
             </thead>
             <tbody>
 
-                <?php echo listUsariosXCentrosCostos($idCompania, $idCc); ?>
+                <?php echo listUsariosManger($idCompania); ?>
     <!-- END Responsive Full Block -->
   </tbody>
 </table>

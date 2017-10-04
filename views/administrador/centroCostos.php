@@ -2,14 +2,13 @@
 
 require_once('../inc/header.php');
 if (isset($_SESSION['nombre'])){
-require_once('../inc/menu_manager.php');
+require_once('../inc/menu_administrador.php');
 require_once('../inc/cabecera_contenido.php');
 require_once('../../models/conexion.php');
-require_once('../../models/ticket_users.php');
-require_once('../../facades/facadeTicketUsers.php');
-$consulta = new TicketUsers();
+require_once('../../models/ticketCostCenters.php');
+require_once('../../facades/facadeTicketCostCenters.php');
+$consulta = new TicketCostCenters();
 $idCompania = $_SESSION['idCompania'];
-$idCc = $_SESSION["idCc"];
 ?>
 <!-- Page content -->
 <div id="page-content">
@@ -17,13 +16,13 @@ $idCc = $_SESSION["idCc"];
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="gi gi-iphone"></i>Usuarios Registrados<br><small>Aquí podras ver todos los usuarios registrados en el sistema!</small>
+                <i class="gi gi-iphone"></i>Centros de Costo Registrados<br><small>Aquí podras ver todos los usuarios registrados en el sistema!</small>
             </h1>
         </div>
     </div>
     <ul class="breadcrumb breadcrumb-top">
         <li>Tabla</li>
-        <li><a href="">Consulta de usuarios</a></li>
+        <li><a href="">Consulta Centros de Costo</a></li>
     </ul>
     <!-- END Table Responsive Header -->
 
@@ -34,24 +33,28 @@ $idCc = $_SESSION["idCc"];
           <!--  <div class="block-options pull-right">
                 <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Configuración"><i class="fa fa-cog"></i></a>
             </div> -->
-            <h2><strong>Todos</strong> Los Usuarios</h2> <a href="crearUsuarioReport.php"><i class="fa fa-plus"></i>Crear Nuevo Usuario</a>
+            <h2><strong>Todos</strong> Los Centros de Costo</h2> <a href="crearCentrosCosto.php"><i class="fa fa-plus"></i>Crear Nuevo Centros de Costo</a>
         </div>
         <!-- END All Orders Title -->
 
         <!-- All Orders Content -->
-        <table id="example-datatable" class="table table-bordered table-striped table-vcenter">
+        <div class="table-responsive">
+        <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
                     <th class="text-center" style="width: 100px;">ID</th>
                     <th class="text-center">Nombre</th>
-                    <th class="text-center">Email</th>
-                    <th class="text-center">Móvil</th>
-                    <th class="text-center">Acciones</th>
+                    <th class="text-center">Prefijo</th>
+                    <th class="text-center">Número</th>
+                    <th class="text-center">Presupuesto</th>
+                    <th class="text-center">Disponible</th>
+                    <th class="text-center">Usado</th>
+                    <th class="text-center">Acción</th>
                 </tr>
             </thead>
             <tbody>
 
-                <?php echo listUsariosXCentrosCostos($idCompania, $idCc); ?>
+                <?php echo listaCentrosCostosFacade($idCompania); ?>
     <!-- END Responsive Full Block -->
   </tbody>
 </table>
@@ -62,34 +65,27 @@ $idCc = $_SESSION["idCc"];
 <!-- button export PFD -->
 <!--<a href="../../reportePdf.php" data-toggle="tooltip" title="pdf" class="btn btn-default" ><i class="fa fa-file-pdf-o"></i></a>-->
 </div>
+</div>
+
+
 <!-- END All Orders Block -->
 </div>
 <!-- END Page Content -->
 
     <?php
     require_once('../inc/footer.php');
-    require_once('../inc/script.php');?>
-    <script>
-      $(document).ready(function(){
-        $('tr #Eliminar_Curso').click(function(e){
-          e.preventDefault();
-          var opcion = confirm("Desea Eliminar");
-          if(opcion){
-            var fila = $(this).parent().parent().parent();
-            var curso = fila.find('#idcurso').text();
-            var data = {idCurso: curso};
-            $.post("../../Controllers/CursoEliminarController.php", data, function (res, est, jqXHR){
-                alert('Se Elimino el curso');
-                fila.remove();
-            });
+    ?>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.2.min.js"%3E%3C/script%3E'));</script>
 
-          }
+    <!-- Bootstrap.js, Jquery plugins and Custom JS code -->
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/app.js"></script>
 
-        });
-      });
-    </script>
-
-    <script src="../dis/js/administracion.js"></script>
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="js/pages/tablesDatatables.js"></script>
+    <script>$(function(){ TablesDatatables.init(); });</script>
     <!-- <script src="../dis/js/pages/ecomOrders.js"></script>
     <script>$(function(){ EcomOrders.init(); });</script>-->
     <!-- User Settings, modal which opens from Settings link (found in top right user menu) and the Cog link (found in sidebar user info) -->
@@ -147,12 +143,21 @@ $idCc = $_SESSION["idCc"];
     <!-- END User Settings -->
     <?php
     require_once('../inc/footer.php');
-    require_once('../inc/script.php');?>
+    ?>
+    <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>!window.jQuery && document.write(decodeURI('%3Cscript src="../dis/js/vendor/jquery-1.11.2.min.js"%3E%3C/script%3E'));</script>
+
+    <!-- Bootstrap.js, Jquery plugins and Custom JS code -->
+    <script src="../dis/js/vendor/bootstrap.min.js"></script>
+    <script src="../dis/js/plugins.js"></script>
+    <script src="../dis/js/app.js"></script>
+
+    <!-- Load and execute javascript code used only in this page -->
     <script src="../dis/js/pages/tablesDatatables.js"></script>
     <script>$(function(){ TablesDatatables.init(); });</script>
-    <!-- Load and execute javascript code used only in this page -->
-    <script src="../dis/js/pages/uiProgress.js"></script>
-    <script>$(function(){ UiProgress.init(); });</script>
+
+
 
 
 
