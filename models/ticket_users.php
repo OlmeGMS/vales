@@ -42,6 +42,19 @@ $conexion = $modelo->close_conexion($statement, $conexion);
 
 }
 
+public function todosusuariosAdmin(){
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "select * from ticket_users where role = 'admin'";
+  $statement = $conexion->prepare($sql);
+  $statement->execute();
+  while ($result = $statement->fetch()) {
+    $row[] = $result;
+  }
+  return $row;
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
 public function crearUsuarioManager($arg_idCompania, $arg_idCostCenter, $arg_parentId, $arg_rol, $arg_nombre, $arg_movil, $arg_email, $arg_pass){
   $modelo = new Conexion();
   $conexion = $modelo->get_conexion();

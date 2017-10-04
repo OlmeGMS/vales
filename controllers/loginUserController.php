@@ -43,7 +43,7 @@ if(isset( $_SESSION["login"])){
             $_SESSION['estado'] = $estado;
             $_SESSION['idCompania'] = $idCompania;
             //$_SESSION['foto'] = $foto;
-            header("Location: ../views/SuperAdministrador/home.php");
+            header("Location: ../views/root/home.php");
           break;
         case 'admin':
           session_start();
@@ -78,6 +78,28 @@ if(isset( $_SESSION["login"])){
            $_SESSION['idCompania'] = $idCompania;
            header("Location: ../views/report/home.php");
            break;
+          case 'payment':
+             session_start();
+              $_SESSION["login"];
+              $_SESSION['nombre'] = $nombreUser;
+              $_SESSION['idUsuario'] = $mensaje;
+              $_SESSION['idRol'] = $rol;
+              $_SESSION['idCc'] = $idCc;
+              $_SESSION['estado'] = $estado;
+              $_SESSION['idCompania'] = $idCompania;
+              header("Location: ../views/payment/home.php");
+          break;
+          case 'central':
+                session_start();
+                 $_SESSION["login"];
+                 $_SESSION['nombre'] = $nombreUser;
+                 $_SESSION['idUsuario'] = $mensaje;
+                 $_SESSION['idRol'] = $rol;
+                 $_SESSION['idCc'] = $idCc;
+                 $_SESSION['estado'] = $estado;
+                 $_SESSION['idCompania'] = $idCompania;
+                 header("Location: ../views/central/home.php");
+          break;
 
         default:
           header("Location: ../views/mensajes/error.html");

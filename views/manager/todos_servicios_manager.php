@@ -159,7 +159,7 @@
     require_once('../inc/script.php');?>
     <script src="../dis/js/paneladministracion.js"></script>
     <script src="../dis/js/pages/ecomOrders.js"></script>
-    <script>$(function(){ EcomOrders.init(); });</script>
+    
 
 
     <?php

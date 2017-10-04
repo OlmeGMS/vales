@@ -199,7 +199,7 @@
     require_once('../inc/script.php');?>
     <script src="../dis/js/paneladministracion.js"></script>
     <script src="../dis/js/pages/ecomOrders.js"></script>
-    <script>$(function(){ EcomOrders.init(); });</script>
+    
     <!-- Load and execute javascript code used only in this page -->
     <script src="js/pages/uiProgress.js"></script>
     <script>$(function(){ UiProgress.init(); });</script>

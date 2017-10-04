@@ -16,6 +16,19 @@ public function nombreCompania($arg_idCompania){
   $conexion = $modelo->close_conexion($statement, $conexion);
 }
 
+public function listaEmpresas(){
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "select * from ticket_companies";
+  $statement = $conexion->prepare($sql);
+  $statement->execute();
+  while ($result = $statement->fetch()) {
+    $row[] = $result;
+  }
+  return $row;
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
 
 }
 

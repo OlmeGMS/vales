@@ -151,7 +151,6 @@ $idCc = $_SESSION["idCc"];
     require_once('../inc/footer.php');
     require_once('../inc/script.php');?>
     <script src="../dis/js/pages/tablesDatatables.js"></script>
-    <script>$(function(){ TablesDatatables.init(); });</script>
     <!-- Load and execute javascript code used only in this page -->
     <script src="../dis/js/pages/uiProgress.js"></script>
     <script>$(function(){ UiProgress.init(); });</script>
