@@ -1,13 +1,14 @@
 <?php
 class Services{
 
-  public function todosServiciosCompania(){
+  public function todosServiciosCompania($arg_idCompania){
 
     $row = null;
     $modelo = new Conexion();
     $conexion = $modelo->get_conexion();
-    $sql = "select ticket_tickets.ticket, services.created_at, services.updated_at, services.user_name, cars.placa, services.barrio, services.units, services.charge1, services.charge2, services.charge4, services.value, services.commit, services.destination, services.index_id, services.comp1, services.comp2, services.no, services.obs, services.barrio, services.qualification from services inner join ticket_tickets on ticket_tickets.ticket = services.user_card_reference inner join cars on services.car_id = cars.id where ticket_tickets.company_id = 9";
+    $sql = "select ticket_tickets.ticket, services.created_at, services.updated_at, services.user_name, cars.placa, services.barrio, services.units, services.charge1, services.charge2, services.charge4, services.value, services.commit, services.destination, services.index_id, services.comp1, services.comp2, services.no, services.obs, services.barrio, services.address, services.qualification from services inner join ticket_tickets on ticket_tickets.ticket = services.user_card_reference inner join cars on services.car_id = cars.id where ticket_tickets.company_id = :idCompania";
     $statement = $conexion->prepare($sql);
+    $statement->bindParam(':idCompania', $arg_idCompania);
     $statement->execute();
     while ($result = $statement->fetch()) {
       $rows[] = $result;
@@ -54,7 +55,7 @@ class Services{
     $modelo = new Conexion();
     $conexion = $modelo->get_conexion();
     $prefijoa = $arg_prefijo."%";
-    $sql = "select ticket_tickets.ticket, services.created_at, services.updated_at, services.user_name, cars.placa, services.barrio, services.units, services.charge1, services.charge2, services.charge4, services.value, services.commit, services.destination, services.index_id, services.comp1, services.comp2, services.no, services.obs, services.barrio, services.qualification from services inner join ticket_tickets on ticket_tickets.ticket = services.user_card_reference inner join cars on services.car_id = cars.id where (MONTH(services.created_at) = :mes) and (services.pay_type = 3) and (services.user_card_reference like :prefijo)";
+    $sql = "select ticket_tickets.ticket, services.created_at, services.updated_at, services.user_name, cars.placa, services.barrio, services.units, services.charge1, services.charge2, services.charge4, services.value, services.commit, services.destination, services.index_id, services.comp1, services.comp2, services.no, services.obs, services.barrio, services.address, services.qualification from services inner join ticket_tickets on ticket_tickets.ticket = services.user_card_reference inner join cars on services.car_id = cars.id where (MONTH(services.created_at) = :mes) and (services.pay_type = 3) and (services.user_card_reference like :prefijo)";
     $statement = $conexion->prepare($sql);
     $statement->bindParam(':prefijo', $prefijoa);
     $statement->bindParam(':mes', $arg_mes);
@@ -73,7 +74,7 @@ class Services{
     $rows = null;
     $modelo = new Conexion();
     $conexion = $modelo->get_conexion();
-    $sql = "select ticket_tickets.ticket, services.created_at, services.updated_at, services.user_name, cars.placa, services.barrio, services.units, services.charge1, services.charge2, services.charge4, services.value, services.commit, services.destination,services.index_id, services.comp1, services.comp2, services.no, services.obs, services.qualification from services inner join ticket_tickets on ticket_tickets.ticket = services.user_card_reference inner join cars on services.car_id = cars.id where (MONTH(services.created_at) = :mes) and (services.pay_type = 3) and (ticket_tickets.company_id = :idCompania)";
+    $sql = "select ticket_tickets.ticket, services.created_at, services.updated_at, services.user_name, cars.placa, services.barrio, services.units, services.charge1, services.charge2, services.charge4, services.value, services.commit, services.destination,services.index_id, services.comp1, services.comp2, services.no, services.obs, services.address, services.qualification from services inner join ticket_tickets on ticket_tickets.ticket = services.user_card_reference inner join cars on services.car_id = cars.id where (MONTH(services.created_at) = :mes) and (services.pay_type = 3) and (ticket_tickets.company_id = :idCompania)";
     $statement = $conexion->prepare($sql);
     $statement->bindParam(':idCompania', $arg_idCompania);
     $statement->bindParam(':mes', $arg_mes);

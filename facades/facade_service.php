@@ -1,23 +1,16 @@
 <?php
-function listServices(){
+function listServices($arg_idCompania){
   $consulta = new Services();
-  $filas = $consulta->todosServiciosCompania();
+  $idCompania =  $arg_idCompania;
+  $filas = $consulta->todosServiciosCompania($idCompania);
   foreach ($filas as $fila) {
-    $dato1 = $fila['index_id'];
-    $dato2 = $fila['comp1'];
-    $dato3 = $fila['comp2'];
-    $dato4 = $fila['no'];
-    $dato5 = $fila['obs'];
-
-    $direccion = $dato1.$dato2.' #'.$dato3.' - '.$dato4.' '.$dato5;
     echo '<tr>
     <td id="" name ="" class="text-center">'.$fila['ticket'].'</td>
     <td id="" name ="" class="text-center">'.$fila['created_at'].'</td>
     <td id="" name ="" class="text-center">'.$fila['updated_at'].'</td>
     <td id="" name ="" class="text-center">'.$fila['user_name'].'</td>
     <td id="" name ="" class="text-center">'.$fila['placa'].'</td>
-    <td id="" name ="" class="text-center">'.$direccion.'</td>
-    <td id="" name ="" class="text-center">'.$fila['barrio'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['address'].'</td>
     <td id="" name ="" class="text-center">'.$fila['units'].'</td>
     <td id="" name ="" class="text-center">'.$fila['charge1'].'</td>
     <td id="" name ="" class="text-center">'.$fila['charge2'].'</td>
@@ -76,8 +69,7 @@ function listServicesManagerMes($arg_idCc, $arg_mes){
     <td id="" name ="" class="text-center">'.$fila['updated_at'].'</td>
     <td id="" name ="" class="text-center">'.$fila['user_name'].'</td>
     <td id="" name ="" class="text-center">'.$fila['placa'].'</td>
-    <td id="" name ="" class="text-center">'.$direccion.'</td>
-    <td id="" name ="" class="text-center">'.$fila['barrio'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['address'].'</td>
     <td id="" name ="" class="text-center">'.$fila['units'].'</td>
     <td id="" name ="" class="text-center">'.$fila['charge1'].'</td>
     <td id="" name ="" class="text-center">'.$fila['charge2'].'</td>
@@ -112,8 +104,7 @@ function listServicesAdministradorMes($arg_idCompania, $arg_mes){
     <td id="" name ="" class="text-center">'.$fila['updated_at'].'</td>
     <td id="" name ="" class="text-center">'.$fila['user_name'].'</td>
     <td id="" name ="" class="text-center">'.$fila['placa'].'</td>
-    <td id="" name ="" class="text-center">'.$direccion.'</td>
-    <td id="" name ="" class="text-center">'.$fila['barrio'].'</td>
+    <td id="" name ="" class="text-center">'.$fila['address'].'</td>
     <td id="" name ="" class="text-center">'.$fila['units'].'</td>
     <td id="" name ="" class="text-center">'.$fila['charge1'].'</td>
     <td id="" name ="" class="text-center">'.$fila['charge2'].'</td>

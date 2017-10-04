@@ -93,7 +93,6 @@
                     <th class="text-center">Usuario</th>
                     <th class="text-center">Placa</th>
                     <th class="text-center">Dirección</th>
-                    <th class="text-center">Barrio</th>
                     <th class="text-center">Unt</th>
                     <th class="text-center">Aer</th>
                     <th class="text-center">Noct</th>
@@ -106,7 +105,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php echo listServices(); ?>
+                <?php echo listServices($idCompania); ?>
     <!-- END Responsive Full Block -->
   </tbody>
 </table>
@@ -206,7 +205,7 @@
     require_once('../inc/script.php');?>
     <script src="../dis/js/paneladministracion.js"></script>
     <script src="../dis/js/pages/ecomOrders.js"></script>
-    
+
 
 
     <?php

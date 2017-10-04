@@ -10,7 +10,6 @@ function listaCentrosCostosFacade($arg_idCompania){
               <td class="text-center">'.$fila['id'].'</td>
               <td class="text-center">'.$fila['name'].'</td>
               <td class="text-center">'.$fila['prefix'].'</td>
-              <td class="text-center">'.$fila['numerator'].'</td>
               <td class="text-center">$'.$fila['budget'].'</td>
               <td class="text-center">$'.$fila['available'].'</td>
               <td class="text-center">$'.$fila['used'].'</td>
@@ -76,7 +75,7 @@ function modificarCentroCostofacade($arg_idCostCenter){
       </form>';
     }
   }else{
-    return header("Location: ../views/manager/usuarioReport.php");
+    return header("Location: ../views/administrador/centroCostos.php");
   }
 }
 

@@ -45,7 +45,6 @@ $idCompania = $_SESSION['idCompania'];
                     <th class="text-center" style="width: 100px;">ID</th>
                     <th class="text-center">Nombre</th>
                     <th class="text-center">Prefijo</th>
-                    <th class="text-center">Número</th>
                     <th class="text-center">Presupuesto</th>
                     <th class="text-center">Disponible</th>
                     <th class="text-center">Usado</th>
