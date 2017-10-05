@@ -154,6 +154,7 @@ $idCompania = $_SESSION['idCompania'];
 
     <!-- Load and execute javascript code used only in this page -->
     <script src="../dis/js/pages/tablesDatatables.js"></script>
+    <script>$(function(){ TablesDatatables.init(); });</script>
 
 
 

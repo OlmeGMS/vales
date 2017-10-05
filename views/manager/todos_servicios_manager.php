@@ -78,25 +78,6 @@
     <?php
     require_once('../inc/footer.php');
     require_once('../inc/script.php');?>
-    <script>
-      $(document).ready(function(){
-        $('tr #Eliminar_Curso').click(function(e){
-          e.preventDefault();
-          var opcion = confirm("Desea Eliminar");
-          if(opcion){
-            var fila = $(this).parent().parent().parent();
-            var curso = fila.find('#idcurso').text();
-            var data = {idCurso: curso};
-            $.post("../../Controllers/CursoEliminarController.php", data, function (res, est, jqXHR){
-                alert('Se Elimino el curso');
-                fila.remove();
-            });
-
-          }
-
-        });
-      });
-    </script>
 
     <script src="../dis/js/administracion.js"></script>
     <!-- <script src="../dis/js/pages/ecomOrders.js"></script>
@@ -159,7 +140,8 @@
     require_once('../inc/script.php');?>
     <script src="../dis/js/paneladministracion.js"></script>
     <script src="../dis/js/pages/ecomOrders.js"></script>
-    
+    <script>$(function(){ EcomOrders.init(); });</script>
+
 
 
     <?php

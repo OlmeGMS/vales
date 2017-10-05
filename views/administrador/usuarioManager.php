@@ -71,7 +71,7 @@ $idCc = $_SESSION["idCc"];
     <?php
     require_once('../inc/footer.php');
     require_once('../inc/script.php');?>
-    
+
     <!-- <script src="../dis/js/pages/ecomOrders.js"></script>
     <script>$(function(){ EcomOrders.init(); });</script>-->
     <!-- User Settings, modal which opens from Settings link (found in top right user menu) and the Cog link (found in sidebar user info) -->
@@ -133,8 +133,8 @@ $idCc = $_SESSION["idCc"];
     <script src="../dis/js/pages/tablesDatatables.js"></script>
     <script>$(function(){ TablesDatatables.init(); });</script>
     <!-- Load and execute javascript code used only in this page -->
-    <script src="../dis/js/pages/uiProgress.js"></script>
-    <script>$(function(){ UiProgress.init(); });</script>
+    <!--<script src="../dis/js/pages/uiProgress.js"></script>
+    <script>$(function(){ UiProgress.init(); });</script>-->
 
 
 
