@@ -54,7 +54,7 @@ if(isset( $_SESSION["login"])){
            $_SESSION['idCc'] = $idCc;
            $_SESSION['estado'] = $estado;
            $_SESSION['idCompania'] = $idCompania;
-            header("Location: ../views/Administrador/home.php");
+            header("Location: ../views/administrador/home.php");
             break;
         case 'manager':
           session_start();

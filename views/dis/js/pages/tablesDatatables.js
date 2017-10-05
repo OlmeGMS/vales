@@ -9,7 +9,7 @@ var TablesDatatables = function() {
     return {
         init: function() {
             /* Initialize Bootstrap Datatables Integration */
-            App.datatables();
+            App.datatables().fnDestroy();
 
             /* Initialize Datatables */
             $('#example-datatable').dataTable({

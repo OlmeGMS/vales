@@ -41,7 +41,7 @@ function listUsariosManger($arg_idCompania){
       <td id="" name ="" class="text-center">'.$fila['cellphone'].'</td>
       <td class="text-center">
             <div class="btn-group btn-group-xs">
-                <a href="modificarUsuarioManager.php?id_manager='.$fila['id'].'" data-toggle="tooltip" title="Editar" class="btn btn-default" ><i class="fa fa-pencil"></i></a>
+                <a href="modificarUsuarioManager.php?id_manager='.$fila['id'].'" data-toggle="tooltip" title="Editar" class="btn btn-default"><i class="fa fa-pencil"></i></a>
                 <!--<a href="" data-toggle="tooltip" title="Eliminar" class="btn btn-xs btn-danger" id="Eliminar_Curso"><i class="fa fa-times"></i></a>-->
             </div>
         </td>

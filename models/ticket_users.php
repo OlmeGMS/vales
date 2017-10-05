@@ -28,10 +28,13 @@ public function todosUsuarioManager($arg_idCompania ){
 $row = null;
 $modelo = new Conexion();
 $conexion = $modelo->get_conexion();
+$rol = 'manager';
 //$sql = "select ticket_users.id, ticket_cost_centers.name as centro, ticket_users.name, ticket_users.cellphone, ticket_users.email FROM ticket_users inner join ticket_cost_centers on ticket_cost_centers.id = ticket_users.company_id where ticket_users.company_id = :idCompania and ticket_users.role = 'manager'";
-$sql = "select ticket_users.id, ticket_users.cost_center_id, ticket_users.name, ticket_users.cellphone, ticket_users.email FROM ticket_users where ticket_users.company_id = :idCompania and ticket_users.role = 'manager'";
+//$sql = "select ticket_users.id, ticket_users.cost_center_id, ticket_users.name, ticket_users.cellphone, ticket_users.email FROM ticket_users where ticket_users.company_id = :idCompania and ticket_users.role = :rol";
+$sql = "select * from ticket_users where ticket_users.company_id = :idCompania and ticket_users.role = :rol";
 $statement = $conexion->prepare($sql);
 $statement->bindParam(':idCompania', $arg_idCompania);
+$statement->bindParam(':rol', $rol);
 $statement->execute();
 while($result = $statement->fetch()){
   $row[] = $result;
