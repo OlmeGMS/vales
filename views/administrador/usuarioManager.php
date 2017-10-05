@@ -6,7 +6,7 @@ require_once('../inc/menu_administrador.php');
 require_once('../inc/cabecera_contenido.php');
 require_once('../../models/conexion.php');
 require_once('../../models/ticket_users.php');
-require_once('../../models/TicketCostCenters.php');
+require_once('../../models/ticketCostCenters.php');
 require_once('../../facades/facadeTicketUsers.php');
 $consulta = new TicketUsers();
 $idCompania = $_SESSION['idCompania'];
