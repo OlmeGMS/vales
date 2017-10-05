@@ -39,7 +39,7 @@ $idCompania = $_SESSION['idCompania'];
 
         <!-- All Orders Content -->
         <div class="table-responsive">
-        <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+        <table id="ecom-orders" class="table table-vcenter table-condensed table-bordered">
             <thead>
                 <tr>
                     <th class="text-center" style="width: 100px;">ID</th>
@@ -153,8 +153,8 @@ $idCompania = $_SESSION['idCompania'];
     <script src="../dis/js/app.js"></script>
 
     <!-- Load and execute javascript code used only in this page -->
-    <script src="../dis/js/pages/tablesDatatables.js"></script>
-    <script>$(function(){ TablesDatatables.init(); });</script>
+    <script src="../dis/js/pages/ecomOrders.js"></script>
+    <script>$(function(){ EcomOrders.init(); });</script>
 
 
 
