@@ -55,7 +55,7 @@ class Services{
     $modelo = new Conexion();
     $conexion = $modelo->get_conexion();
     $prefijoa = $arg_prefijo."%";
-    $sql = "select ticket_tickets.ticket, services.created_at, services.updated_at, services.user_name, cars.placa, services.barrio, services.units, services.charge1, services.charge2, services.charge4, services.value, services.commit, services.destination, services.index_id, services.comp1, services.comp2, services.no, services.obs, services.barrio, services.address, services.qualification from services inner join ticket_tickets on ticket_tickets.ticket = services.user_card_reference inner join cars on services.car_id = cars.id where (MONTH(services.created_at) = :mes) and (services.pay_type = 3) and (services.status_id = 5  ) and (services.user_card_reference like :prefijo)";
+    $sql = "select ticket_tickets.ticket, services.created_at, services.updated_at, services.user_name, cars.placa, services.barrio, services.units, services.charge1, services.charge2, services.charge4, services.value, services.commit, services.destination, services.index_id, services.comp1, services.comp2, services.no, services.obs, services.barrio, services.address, services.qualification from services inner join ticket_tickets on ticket_tickets.ticket = services.user_card_reference inner join cars on services.car_id = cars.id where (MONTH(services.created_at) = :mes) and (services.pay_type = 3) and (services.status_id = 5) and (services.user_card_reference like :prefijo)";
     $statement = $conexion->prepare($sql);
     $statement->bindParam(':prefijo', $prefijoa);
     $statement->bindParam(':mes', $arg_mes);
