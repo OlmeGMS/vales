@@ -1,4 +1,4 @@
-Administradoradministrador<?php
+<?php
 require_once('../../models/conexion.php');
 require_once('../../models/services.php');
 
