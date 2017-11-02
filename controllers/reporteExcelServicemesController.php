@@ -27,6 +27,7 @@ $mes = $_GET['idmes'];
                   <th class="text-center">Fecha fin</th>
                   <th class="text-center">Usuario</th>
                   <th class="text-center">Placa</th>
+                  <th class="text-center">Dirección</th>
                   <th class="text-center">Unt</th>
                   <th class="text-center">Aer</th>
                   <th class="text-center">Noct</th>
@@ -49,6 +50,7 @@ $mes = $_GET['idmes'];
                   <td id="" name ="" class="text-center"><?php echo $fila['updated_at']; ?></td>
                   <td id="" name ="" class="text-center"><?php echo $fila['user_name']; ?></td>
                   <td id="" name ="" class="text-center"><?php echo $fila['placa']; ?></td>
+                  <td id="" name ="" class="text-center"><?php echo $fila['address']; ?></td>
                   <td id="" name ="" class="text-center"><?php echo $fila['units']; ?></td>
                   <td id="" name ="" class="text-center"><?php echo $fila['charge1']; ?></td>
                   <td id="" name ="" class="text-center"><?php echo $fila['charge2']; ?></td>
