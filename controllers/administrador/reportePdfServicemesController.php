@@ -53,7 +53,7 @@ $idCompania = $_SESSION['idCompania'];
               <td id="" name ="" class="text-center">'.$fila['updated_at'].'</td>
               <td id="" name ="" class="text-center">'.$fila['user_name'].'</td>
               <td id="" name ="" class="text-center">'.$fila['placa'].'</td>
-              <td id="" name ="" class="text-center">'.$direccion.'</td>
+              <td id="" name ="" class="text-center">'.$fila['address'].'</td>
               <td id="" name ="" class="text-center">'.$fila['barrio'].'</td>
               <td id="" name ="" class="text-center">'.$fila['units'].'</td>
               <td id="" name ="" class="text-center">'.$fila['charge1'].'</td>

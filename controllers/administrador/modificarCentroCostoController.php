@@ -10,7 +10,15 @@ $presupuesto = $_POST['presupuesto'];
 
 if(strlen($idCentroCostos) > 0 && strlen($nombre) > 0 && strlen($presupuesto) > 0){
 
-  $mensaje = $consulta->modificarCentroCosto($nombre, $presupuesto, $idCentroCostos);
+  $porciento = $presupuesto*10/100;
+
+  $msj = $consulta->actualizarPorcentaje($porciento, $idCentroCostos);
+  if ($msj == FALSE) {
+    echo "ERROR: No se pudo actualizar el porcentaje";
+  }else {
+    $mensaje = $consulta->modificarCentroCosto($nombre, $presupuesto, $idCentroCostos);
+  }
+
 
 }else{
   header("Location: ../../views/mensajes/error.php");

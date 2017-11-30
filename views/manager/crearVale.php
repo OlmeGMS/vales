@@ -9,13 +9,28 @@
   require_once('../../models/ticketCompanies.php');
   require_once('../../facades/facade_service.php');
   require_once('../../vendor/dompdf/dompdf_config.inc.php');
+  require_once('../../models/ticketCostCenters.php');
 
 
   $consulta = new TicketTickets();
+  $consultaTicketCost = new TicketCostCenters();
   $idCc = $_SESSION["idCc"];
   //$mes = $_GET['idmes'];
 
   $idcompanies = $_SESSION['idCompania'];
+
+  $presupuesto = $consultaTicketCost->obtnerPresupuestoCentroCosto($idCc);
+  $porcentaje = $consultaTicketCost->obtnerPorcentaje($idCc);
+  $facturado = $consultaTicketCost->obtenerAvaliableCentroCosto($idCc);
+  $gasto = $consultaTicketCost->obtnerGastoXCentroCosto($idCc);
+
+  $saldo = $presupuesto - $facturado - $gasto;
+
+  if ($saldo > 0) {
+    $label = "label-success";
+  }else{
+    $label = "label-danger";
+  }
 
   ?>
 <!-- Page content -->
@@ -100,7 +115,10 @@
           <!--  <div class="block-options pull-right">
                 <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Configuración"><i class="fa fa-cog"></i></a>
             </div> -->
-            <h2><strong>Todos</strong> Los Vales</h2>
+            <h2><strong>Todos</strong> Los Vales</h2> &nbsp;&nbsp;&nbsp;&nbsp;<span>Presupuesto: <span class="label label-info"><?php echo '$'.$presupuesto; ?></span></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Facturado: <i class="label" style="background: #058de7;"><?php echo '$'.$facturado?></i>
+            </span>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span>Gastado este mes: <i class="label label-info"><?php echo '$'.$gasto; ?></i></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Saldo: <i class="label <?php echo $label?>">
+            <?php echo '$'.$saldo; ?></i></span>
         </div>
         <!-- END All Orders Title -->
 <div class="table-responsive remove-margin-bottom">

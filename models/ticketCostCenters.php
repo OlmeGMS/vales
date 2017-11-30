@@ -141,6 +141,185 @@ public function modificarCentroCosto($arg_nombre, $arg_presupuesto, $arg_idCostC
   }
 }
 
+public function obtnerIDCentroXPrefijo($arg_prefijo){
+
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $prefijo = '%'.$arg_prefijo.'%';
+  $sql = "select id from ticket_cost_centers where prefix like :prefijo";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":prefijo", $prefijo);
+  $statement->execute();
+  $idCostCenter = $statement->fetchColumn();
+
+  return $idCostCenter;
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
+public function obtnerPorcentaje($arg_idCc){
+
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "select porciento from ticket_cost_centers where id = :id LIMIT 1";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":id", $arg_idCc);
+  $statement->execute();
+  $porcentaje = $statement->fetchColumn();
+
+  return $porcentaje;
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
+public function obtenerAvaliableCentroCosto($arg_idCc){
+
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "select available from ticket_cost_centers where id = :id LIMIT 1";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":id", $arg_idCc);
+  $statement->execute();
+  $facturado = $statement->fetchColumn();
+
+  return $facturado;
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
+public function obtnerPresupuestoCentroCosto($arg_idCc){
+
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "select budget from ticket_cost_centers where id = :id LIMIT 1";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":id", $arg_idCc);
+  $statement->execute();
+  $presupuesto = $statement->fetchColumn();
+
+  return $presupuesto;
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
+public function listaPrefijos($arg_idCompania){
+
+  $rows = null;
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "select prefix from ticket_cost_centers where company_id = :idCompania";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":idCompania", $arg_idCompania);
+  $statement->execute();
+  while ($result = $statement->fetch()) {
+    $row[] = $result;
+  }
+
+  return $row;
+  $conexion = $modelo->close_conexion($statement, $conexion);
+
+}
+
+public function nombrePrefijoXPrefijo($arg_prefijo){
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $prefijo = '%'.$arg_prefijo.'%';
+  $sql = "select name from ticket_cost_centers where prefix like :prefijo LIMIT 1";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":prefijo", $prefijo);
+  $statement->execute();
+  $nombre = $statement->fetchColumn();
+
+  return $nombre;
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
+public function actualizarGasto($arg_gasto, $arg_idCentroCosto){
+
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "update ticket_cost_centers set gasto = :gasto where id = :id";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":gasto", $arg_gasto);
+  $statement->bindParam(":id", $arg_idCentroCosto);
+
+  if (!$statement) {
+    return FALSE;
+  }else{
+    $statement->execute();
+    return TRUE;
+  }
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+
+}
+
+public function actualizarUsed($arg_saldo, $arg_idCentroCosto){
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "update ticket_cost_centers set used = :saldo where id = :id";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":saldo", $arg_saldo);
+  $statement->bindParam(":id", $arg_idCentroCosto);
+
+  if (!$statement) {
+    return FALSE;
+  }else{
+    $statement->execute();
+    return TRUE;
+  }
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
+public function obtnerPrefijoXIdCentroCostos($arg_idCc){
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "select prefix from ticket_cost_centers where id = :centroCosto LIMIT 1";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":centroCosto", $arg_idCc);
+  $statement->execute();
+  $prefijo = $statement->fetchColumn();
+
+  return $prefijo;
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
+public function obtnerGastoXCentroCosto($arg_idCc){
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "select gasto from ticket_cost_centers where id = :centroCosto LIMIT 1";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":centroCosto", $arg_idCc);
+  $statement->execute();
+  $gasto = $statement->fetchColumn();
+
+  return $gasto;
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
+public function actualizarPorcentaje($arg_porticiento, $arg_idCentroCosto){
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "update ticket_cost_centers set porciento = :porciento where id = :id";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":porciento", $arg_porticiento);
+  $statement->bindParam(":id", $arg_idCentroCosto);
+
+  if (!$statement) {
+    return FALSE;
+  }else{
+    $statement->execute();
+    return TRUE;
+  }
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+
+}
+
 
 }
 

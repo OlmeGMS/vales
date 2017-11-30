@@ -231,6 +231,53 @@ public function verificarMovil($arg_movil){
 
 }
 
+public function obtnerEmailUserTicket($arg_id){
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "select email from ticket_users where id = :id";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":id", $arg_id);
+  $statement->execute();
+  $presupuesto = $statement->fetchColumn();
+
+  return $presupuesto;
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+
+}
+
+public function obtnerNombreUserTicket($arg_id){
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "select name from ticket_users where id = :id";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":id", $arg_id);
+  $statement->execute();
+  $presupuesto = $statement->fetchColumn();
+
+  return $presupuesto;
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
+public function obtnerUsuarioAdminXIdCompania($arg_idCompania){
+  $modelo = new Conexion();
+  $row = null;
+  $conexion = $modelo->get_conexion();
+  $sql = "select * from ticket_users where role = 'admin' and company_id = :id;
+";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":id", $arg_idCompania);
+  $statement->execute();
+  while ($result = $statement->fetch()) {
+    $row[] = $result;
+  }
+
+  return $row;
+  $conexion = $modelo->close_conexion($statement, $conexion);
+
+}
+
 
 
 

@@ -7,15 +7,23 @@
   require_once('../../models/conexion.php');
   require_once('../../models/ticketTickets.php');
   require_once('../../models/ticketCompanies.php');
+  require_once('../../models/ticketCostCenters.php');
   require_once('../../facades/facade_service.php');
   require_once('../../vendor/dompdf/dompdf_config.inc.php');
 
 
   $consulta = new TicketTickets();
+  $consultaTicketCost = new TicketCostCenters();
   $idCc = $_SESSION["idCc"];
   //$mes = $_GET['idmes'];
 
   $idcompanies = $_SESSION['idCompania'];
+
+  $presupuesto = $consultaTicketCost->obtnerPresupuestoCentroCosto($idCc);
+  $porcentaje = $consultaTicketCost->obtnerPorcentaje($idCc);
+  $facturado = $consultaTicketCost->obtenerAvaliableCentroCosto($idCc);
+  $gasto = $consultaTicketCost->obtnerGastoXCentroCosto($idCc)
+
 
   ?>
 <!-- Page content -->
@@ -45,7 +53,7 @@
         <!-- END All Orders Title -->
 <div class="table-responsive remove-margin-bottom">
         <!-- All Orders Content -->
-        <table id="ecom-orders" class="table table-bordered table-striped table-vcenter">
+        <table id="tabla-vales" class="table table-bordered table-striped table-vcenter">
             <thead>
                 <tr>
                     <th class="text-center">Empresa</th>
@@ -82,13 +90,11 @@
     require_once('../inc/footer.php');
     require_once('../inc/script.php');?>
 
-    <script src="../dis/js/pages/ecomOrders.js"></script>
-    <script>$(function(){ EcomOrders.init(); });</script>
+    <script src="../dis/js/pages/tablaVales.js"></script>
+    <script>$(function(){ TablesDataVales.init(); });</script>
     <!-- Load and execute javascript code used only in this page -->
     <script src="js/pages/uiProgress.js"></script>
     <script>$(function(){ UiProgress.init(); });</script>
-    <!-- <script src="../dis/js/pages/ecomOrders.js"></script>
-    <script>$(function(){ EcomOrders.init(); });</script>-->
     <!-- User Settings, modal which opens from Settings link (found in top right user menu) and the Cog link (found in sidebar user info) -->
 
     <?php

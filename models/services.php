@@ -88,6 +88,39 @@ class Services{
 
   }
 
+  public function estadoServicioFacturado(){
+    $modelo = new Conexion ();
+    $conexion = $modelo->get_conexion();
+    $sql = "select * from services where status_id = 5 and facturado = 1 and pay_type = 3";
+    //$sql = "select * from services where status_id = 5 and facturado = 1 and pay_type = 3 and user_card_reference like '%JV%'";
+    $statement = $conexion->prepare($sql);
+    $statement->execute();
+    while ($result = $statement->fetch()) {
+
+      $rows[] = $result;
+    }
+    return $rows;
+    $conexion = $modelo->close_conexion($statement, $conexion);
+  }
+
+  public function estadoServicioFacturadoXCC($arg_idCc){
+
+    $rows= null;
+    $modelo = new Conexion ();
+    $conexion = $modelo->get_conexion();
+    $idCc = '%'.$arg_idCc.'%';
+    $sql = "select * from services where status_id = 5 and facturado = 1 and pay_type = 3 and user_card_reference like :centro";
+    $statement = $conexion->prepare($sql);
+    $statement->bindParam(':centro', $idCc);
+    $statement->execute();
+    while ($result = $statement->fetch()) {
+
+      $rows[] = $result;
+    }
+    return $rows;
+    $conexion = $modelo->close_conexion($statement, $conexion);
+  }
+
 
 
 

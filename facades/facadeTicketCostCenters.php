@@ -6,14 +6,26 @@ function listaCentrosCostosFacade($arg_idCompania){
   $idCompania = $arg_idCompania;
   $filas = $consulta->listaCentrosCostos($idCompania);
   foreach ($filas as $fila) {
+    $facturado = $fila['available'];
+    $gasto = $fila['gasto'];
+    $saldo = $fila['used'];
+    $porciento = $fila ['porciento'];
+    $resultado = $facturado + $gasto;
+
     echo '<tr>
               <td class="text-center">'.$fila['id'].'</td>
               <td class="text-center">'.$fila['name'].'</td>
               <td class="text-center">'.$fila['prefix'].'</td>
               <td class="text-center">$'.$fila['budget'].'</td>
               <td class="text-center">$'.$fila['available'].'</td>
-              <td class="text-center">$'.$fila['used'].'</td>
-              <td class="text-center">
+              <td class="text-center">$'.$fila['gasto'].'</td>';
+              if($saldo > 0){
+                echo '<td class="text-center"><span class="label label-success">$'.$fila['used'].'</span></td>';
+              }else {
+                echo '<td class="text-center"><span class="label label-danger">$'.$fila['used'].'</span></td>';
+              }
+
+echo              '<td class="text-center">
                     <div class="btn-group btn-group-xs">
                         <a href="modificarCentroCosto.php?id_cc='.$fila['id'].'" data-toggle="tooltip" title="Editar" class="btn btn-default" ><i class="fa fa-pencil"></i></a>
                         <!--<a href="" data-toggle="tooltip" title="Eliminar" class="btn btn-xs btn-danger" id="Eliminar_Curso"><i class="fa fa-times"></i></a>-->

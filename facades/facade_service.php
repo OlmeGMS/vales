@@ -143,6 +143,9 @@ function listValesXDependecia($arg_idDependencia){
             case 3:
               echo '<td class="text-center"><span class="label label-danger">Vencido</span></td>';
               break;
+             case 4:
+              echo '<td class="text-center"><span class="label " style="background: #503ce7;">Central</span></td>';
+              break;
       default:
         # code...
         break;
@@ -180,6 +183,9 @@ function listValesXCompania($arg_idCompania){
             case 3:
               echo '<td class="text-center"><span class="label label-danger">Vencido</span></td>';
               break;
+              case 4:
+               echo '<td class="text-center"><span class="label " style="background: #503ce7;">Central</span></td>';
+               break;
       default:
         # code...
         break;

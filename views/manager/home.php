@@ -51,6 +51,11 @@
                                       <!-- Web Server Content -->
                                       <!-- Flot Charts (initialized in js/pages/index2.js), for more examples you can check out http://www.flotcharts.org/ -->
                                       <div id="dash-chart-live" class="chart">
+                                        <input type="hidden" name="idCompania" id="idCompania" value="<?php echo $idCompania ?>">
+                                        <input type="hidden" name="idUsuario" id="idUsuario" value="<?php echo $idUsuario ?>">
+                                        <input type="hidden" name="idCentroCosto" id="idCentroCosto" value="<?php echo $idCentroCostos?>">
+
+                                        <span id="mensaje_factura" class="hidden"></span>
                                           <center><img align="center" src="../dis/img/taxi.jpg"  class="chart" ></center>
                                       </div>
                                       <!-- END Web Server Content -->
@@ -91,6 +96,18 @@
   require_once('../inc/script.php');
   ?>
   <!-- Load and execute javascript code used only in this page -->
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var compania = $('#idCompania').val();
+      var usuario = $('#idUsuario').val();
+      var centroCosto = $('#idCentroCosto').val();
+      var data = {idCompania: compania, id_usuario: usuario, idCC: centroCosto};
+      $.post("../../controllers/conteoDiarioServiciosManager.php", data, function(datos){
+          $("#mensaje_factura").html(datos);
+      });
+    });
+  </script>
+
   <script src="../dis/js/pages/index.js"></script>
   <script>
       $(function() {

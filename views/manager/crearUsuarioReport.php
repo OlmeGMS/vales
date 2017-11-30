@@ -7,8 +7,12 @@ require_once('../../models/conexion.php');
 require_once('../../models/ticket_users.php');
 
 
+$consulta = new TicketTickets();
+$consultaTicketCost = new TicketCostCenters();
+$idCc = $_SESSION["idCc"];
+//$mes = $_GET['idmes'];
 
-
+$idcompanies = $_SESSION['idCompania'];
 
 ?>
 

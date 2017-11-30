@@ -7,7 +7,7 @@
 
             'page-loading'      enables page preloader
         -->
-    <div id="page-wrapper" >
+    <div id="page-wrapper" class="">
         <!-- Preloader -->
         <!-- Preloader functionality (initialized in js/app.js) - pageLoading() -->
         <!-- Used only if page preloader is enabled from inc/config (PHP version) or the class 'page-loading' is added in #page-wrapper element (HTML version) -->
