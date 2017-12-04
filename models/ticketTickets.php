@@ -59,5 +59,41 @@ class TicketTickets{
   }
 
 
+public function obtenerTodosValesDisponiblesXCentroCosto($arg_idCostCenter){
+
+  $rows = null;
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "select * from ticket_tickets where status = 0 and ticket_user_id = :idCostCenter order by id desc LIMIT 500";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(':idCostCenter', $arg_idCostCenter);
+  $statement->execute();
+  while ($result = $statement->fetch()) {
+    $rows[] = $result;
+  }
+
+  return $rows;
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
+public function vencerVales($arg_idVale){
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "update ticket_tickets set status = 3 where id = :id";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(':id', $arg_idVale);
+
+  if (!$statement) {
+    return FALSE;
+  }else{
+    $statement->execute();
+    return TRUE;
+  }
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
+
+
 }
  ?>

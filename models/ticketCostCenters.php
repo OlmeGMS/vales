@@ -318,8 +318,8 @@ public function actualizarPorcentaje($arg_porticiento, $arg_idCentroCosto){
 
   $conexion = $modelo->close_conexion($statement, $conexion);
 
-} 
-/*
+}
+
 public function modificarBloqueo($arg_bloqueo, $arg_idCentroCosto){
   $modelo = new Conexion();
   $conexion = $modelo->get_conexion();
@@ -338,7 +338,7 @@ public function modificarBloqueo($arg_bloqueo, $arg_idCentroCosto){
   $conexion = $modelo->close_conexion($statement, $conexion);
 }
 
-public function obtnerBloqueo($arg_idCentroCosto){
+public function obtenerBloqueo($arg_idCentroCosto){
   $modelo = new Conexion();
   $conexion = $modelo->get_conexion();
   $sql = "select bloqueo from ticket_cost_centers where id = :idCC LIMIT 1";
@@ -351,7 +351,35 @@ public function obtnerBloqueo($arg_idCentroCosto){
 
   $conexion = $modelo->close_conexion($statement, $conexion);
 }
-*/
+
+public function obtenerUsed($arg_idCentroCosto){
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "select used from ticket_cost_centers where id = :idCC LIMIT 1";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(':idCC', $arg_idCentroCosto);
+  $statement->execute();
+  $nombreCompania = $statement->fetchColumn();
+
+  return $nombreCompania;
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
+public function obtnerIDCompaniaXCC($arg_idCentroCosto){
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "select company_id from ticket_cost_centers where id = :idCC LIMIT 1";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(':idCC', $arg_idCentroCosto);
+  $statement->execute();
+  $nombreCompania = $statement->fetchColumn();
+
+  return $nombreCompania;
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+
 
 }
 

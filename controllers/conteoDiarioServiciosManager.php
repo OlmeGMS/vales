@@ -3,6 +3,8 @@ require_once('../models/conexion.php');
 require_once('../models/services.php');
 require_once('../models/ticketCostCenters.php');
 require_once('../models/ticket_users.php');
+require_once('../models/ticketCompanies.php');
+require_once('../models/ticketTickets.php');
 require_once('../vendor/autoload.php');
 require_once('../views/mensajes/template_correo_presupuesto.php');
 
@@ -12,10 +14,13 @@ require_once('../views/mensajes/template_correo_presupuesto.php');
 $consulta = new Services();
 $consultaTicketCost = new TicketCostCenters();
 $consultaUsuario = new TicketUsers();
+$consultaCompania = new TicketCompanies();
+$consultaTicketTickets = new TicketTickets();
 
 $idCompania = $_POST['idCompania'];
 $idUsuario = $_POST['id_usuario'];
 $idCentroCosto = $_POST['idCC'];
+$tipoBloqueo = $consultaCompania->obtenerTipoBloqueo($idCompania);
 
 //$idCompania = 9;
 
@@ -139,6 +144,23 @@ $suma;
                                   }else{
                                     $HTML = 1;
                                   }
+                        }
+                        if ($tipoBloqueo == 1){
+                          $arg_bloqueo = 1;
+                          $bloqueo = $consultaTicketCost->modificarBloqueo($arg_bloqueo, $idCentroCosto);
+                          $vales = $consultaTicketTickets->obtenerTodosValesDisponiblesXCentroCosto($idCentroCosto);
+                          foreach ($vales as $vale) {
+
+                                $idVale = $vale['id'];
+
+                                $infoVale = $consultaTicketTickets->vencerVales($idVale);
+                                if ($infoVale == FALSE) {
+                                  echo "<script> console.log('ERROR: No se pudo vencer el vale');</script>";
+                                }else{
+                                  echo "<script> console.log('el vale con id : $idVale ha caducado por bloqueo');</script>";
+                                }
+
+                          }
                         }
 
                 echo "

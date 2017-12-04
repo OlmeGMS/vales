@@ -1,8 +1,6 @@
 <?php
   session_start();
-  $rol = $_SESSION['idRol'];
-  require_once('../../Models/Conexion.php');
-  require_once('../../Models/Examen.php');
+  $rol = $_SESSION['estado'];
 
   ?>
    <!DOCTYPE html>
@@ -13,10 +11,10 @@
        <head>
            <meta charset="utf-8">
 
-           <title>University Test</title>
+           <title>TaxisYa</title>
 
-           <meta name="description" content="Sigte">
-           <meta name="author" content="Integer-Soft">
+           <meta name="description" content="">
+           <meta name="author" content="Wildcatsoft">
            <meta name="robots" content="noindex, nofollow">
 
            <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
@@ -49,33 +47,20 @@
        <div id="error-container">
            <div class="error-options">
                <h3><i class="fa fa-chevron-circle-left text-muted"></i> <?php
-               $consulta = new Examen();
-               $examen = $consulta->idExamen();
                switch ($rol) {
-               case '1':
+               case 'root':
                   echo '<a href="../SuperAdministrador/home.php">Regresar</a></h3>';
                  break;
-                 case '2':
-                    echo '<a href="../Administrador/agregar_cuestionario.php?id_examen='.$examen.'">Regresar</a></h3>';
+                 case 'admin':
+                    echo '<a href="../administrador/home.php">Regresar</a></h3>';
                    break;
-                   case '3':
-                      echo '<a href="../Rector/home.php">Regresar</a></h3>';
+                   case 'manager':
+                      echo '<a href="../manager/home.php">Regresar</a></h3>';
                      break;
-                     case '4':
-                        echo '<a href="../Coordinador/home.php">Regresar</a></h3>';
+                     case 'report':
+                        echo '<a href="../report/home.php">Regresar</a></h3>';
                        break;
-                       case '5':
-                          echo '<a href="../JefeArea/home.php">Regresar</a></h3>';
-                         break;
-                         case '6':
-                            echo '<a href="../Docente/home.php">Regresar</a></h3>';
-                           break;
-                           case '7':
-                              echo '<a href="../Estudiante/home.php">Regresar</a></h3>';
-                             break;
-                             case '7':
-                                echo '<a href="../Administrativo/home.php">Regresar</a></h3>';
-                               break;
+
 
                default:
                    echo '<a href="error.html">Regresar</a></h3>';
@@ -87,7 +72,7 @@
            <div class="row">
                <div class="col-sm-8 col-sm-offset-2 text-center">
                    <h1 class="animation-pulse"><i class="fa fa-close text-danger"></i></h1>
-                   <h2 class="h3">¡ERROR! <br>Lo sentimos ocurrio un error. <br> la preguntas seleccionadas deben ser igual a las cantidad de preguntas que tendra el examen</h2>
+                   <h2 class="h3">¡ERROR! <br>No se pueden crear nuevos vales. <br> Su centro de costo esta sin presupuesto.</h2>
 
                </div>
            </div>

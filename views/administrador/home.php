@@ -55,6 +55,7 @@
                                           <input type="hidden" name="idCompania" id="idCompania" value="<?php echo $idCompania ?>">
                                           <input type="hidden" name="idUsuario" id="idUsuario" value="<?php echo $idUsuario ?>">
                                           <span id="mensaje_factura" class="hidden"></span>
+                                          <span id="control_vencimiento" class="hidden"></span>
                                           <center><img align="center" src="../dis/img/taxi.jpg"  class="chart" ></center>
                                       </div>
                                       <!-- END Web Server Content -->
@@ -102,6 +103,17 @@
       var data = {idCompania: compania, id_usuario: usuario}
       $.post("../../controllers/conteoDiarioServicios.php", data, function(datos){
           $("#mensaje_factura").html(datos);
+      });
+    });
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var compania = $('#idCompania').val();
+      //var usuario = $('#idUsuario').val();
+      var data = {idCompania: compania}
+      $.post("../../controllers/vencerValesXDiaController.php", data, function(datos){
+          $("#control_vencimiento").html(datos);
       });
     });
   </script>

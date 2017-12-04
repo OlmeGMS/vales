@@ -28,8 +28,8 @@ public function listaEmpresas(){
   return $row;
   $conexion = $modelo->close_conexion($statement, $conexion);
 }
-/*
-public function obtnerTipoBloqueo($arg_idCompania){
+
+public function obtenerTipoBloqueo($arg_idCompania){
   $modelo = new Conexion();
   $conexion = $modelo->get_conexion();
   $sql = "select tipo_bloqueo from ticket_companies where id  = :idCompania LIMIT 1";
@@ -41,7 +41,7 @@ public function obtnerTipoBloqueo($arg_idCompania){
   return $nombreCompania;
 
   $conexion = $modelo->close_conexion($statement, $conexion);
-}*/
+}
 
 
 }
