@@ -147,7 +147,7 @@ $suma;
 
 
                 //echo "Su presupuesto para $nombre esta pronto a llegar a su fin le quedan : $$saldo";
-              }elseif  ($resultado <= $porcentaje){
+              }elseif  ($saldo <= $porcentaje){
                 $opc = 1;
                         $mail = new PHPMailer;
                         $mail->CharSet = "UTF-8";

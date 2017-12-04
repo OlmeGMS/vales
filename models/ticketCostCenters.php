@@ -318,8 +318,40 @@ public function actualizarPorcentaje($arg_porticiento, $arg_idCentroCosto){
 
   $conexion = $modelo->close_conexion($statement, $conexion);
 
+} 
+/*
+public function modificarBloqueo($arg_bloqueo, $arg_idCentroCosto){
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "update ticket_cost_centers set bloqueo = :bloqueo where id = :id";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(":bloqueo", $arg_bloqueo);
+  $statement->bindParam(":id", $arg_idCentroCosto);
+
+  if (!$statement) {
+    return FALSE;
+  }else{
+    $statement->execute();
+    return TRUE;
+  }
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
 }
 
+public function obtnerBloqueo($arg_idCentroCosto){
+  $modelo = new Conexion();
+  $conexion = $modelo->get_conexion();
+  $sql = "select bloqueo from ticket_cost_centers where id = :idCC LIMIT 1";
+  $statement = $conexion->prepare($sql);
+  $statement->bindParam(':idCC', $arg_idCentroCosto);
+  $statement->execute();
+  $nombreCompania = $statement->fetchColumn();
+
+  return $nombreCompania;
+
+  $conexion = $modelo->close_conexion($statement, $conexion);
+}
+*/
 
 }
 

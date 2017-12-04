@@ -3,6 +3,7 @@ require_once('../models/conexion.php');
 require_once('../models/services.php');
 require_once('../models/ticketCostCenters.php');
 require_once('../models/ticket_users.php');
+require_once('../models/ticketCompanies.php');
 require_once('../vendor/autoload.php');
 require_once('../views/mensajes/template_correo_presupuesto.php');
 
@@ -12,11 +13,12 @@ require_once('../views/mensajes/template_correo_presupuesto.php');
 $consulta = new Services();
 $consultaTicketCost = new TicketCostCenters();
 $consultaUsuario = new TicketUsers();
+$consultaCompania = new TicketCompanies();
 
 $idCompania = $_POST['idCompania'];
 $idUsuario = $_POST['id_usuario'];
 
-
+//$tipoBloqueo = $consultaCompania->obtnerTipoBloqueo($idCompania);
 
 //$idCompania = 9;
 
@@ -62,7 +64,7 @@ foreach($prefijos as $prefijo){
 
 
         if ($mensaje == FALSE) {
-          echo "ERRO: No se puedo actualizar el gasto";
+          echo "<script> console.log('ERROR: No se puedo actualizar el gasto');</script>";
         }else {
             $saldo = $presupuesto - $facturado - $suma;
             $resultado = $facturado + $suma;
@@ -70,15 +72,17 @@ foreach($prefijos as $prefijo){
             $msj = $consultaTicketCost->actualizarUsed($saldo, $idCentroCosto);
 
             if ($msj == FALSE) {
-              echo "ERROR: No se puedo actualizar el saldo";
+              echo "<script> console.log('ERROR: No se puedo actualizar el saldo');</script>";
             }else {
                 if ($resultado >= $presupuesto){
-
+                    /*if ($tipoBloqueo == 1){
+                      $bloqueo = $consultaTicketCost->
+                    }*/
                   echo "
                     <script> alert('Su presupuesto para $nombre ha finalizado : $$saldo');</script>
                   ";
                   //echo "Su presupuesto para $nombre esta pronto a llegar a su fin le quedan : $$saldo";
-                }elseif  ($resultado <= $porcentaje){
+                }elseif  ($saldo <= $porcentaje){
                   echo "
                     <script> alert('Su presupuesto para $nombre esta pronto a llegar a su fin. Le quedan : $$saldo');</script>
                   ";
