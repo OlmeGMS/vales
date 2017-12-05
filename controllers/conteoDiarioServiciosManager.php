@@ -191,7 +191,7 @@ $suma;
                         $mail->setFrom('taxisya.cms@gmail.com', 'TaxisYa');
                         $mail->addAddress($email, $nombreUsuario);
                         $mail->isHTML(true);
-                        $mail->Subject = 'Recuper contraseña de Taxisya';
+                        $mail->Subject = 'Taxisya Información del presupuesto';
                         $mail->Body    = EmailTemplatePresupuesto($nombre, $saldo, $opc);
                         $mail->AltBody = 'Hola'. $nombreUsuario . ': Su presupuesto para '.$nombre.' esta por vencerse su saldo es de: $'.$saldo;
 
@@ -229,7 +229,7 @@ $suma;
                                   $mail->setFrom('taxisya.cms@gmail.com', 'TaxisYa');
                                   $mail->addAddress($flecha, $name);
                                   $mail->isHTML(true);
-                                  $mail->Subject = 'Recuper contraseña de Taxisya';
+                                  $mail->Subject = 'Taxisya Información del presupuesto';
                                   $mail->Body    = EmailTemplatePresupuesto($nombre, $saldo, $opc);
                                   $mail->AltBody = 'Hola'. $name . ': Su presupuesto para '.$nombre.' esta por vencerse su saldo es de: $'.$saldo;
 
