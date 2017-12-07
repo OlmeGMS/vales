@@ -6,9 +6,19 @@ require_once('../inc/menu_administrador.php');
 require_once('../inc/cabecera_contenido.php');
 require_once('../../models/conexion.php');
 require_once('../../models/ticketCostCenters.php');
+require_once('../../models/ticketCompanies.php');
 require_once('../../facades/facadeTicketCostCenters.php');
+
+setlocale(LC_MONETARY, 'us_US');
+
 $consulta = new TicketCostCenters();
+$consultaTicketCompanies = new TicketCompanies();
 $idCompania = $_SESSION['idCompania'];
+$presupuesto = money_format('%i',$consultaTicketCompanies->obtenerPresupuestoAdm($idCompania));
+$facturado = money_format('%i',$consultaTicketCompanies->obtenerFacturadoAdm($idCompania));
+$usado = money_format('%i',$consultaTicketCompanies->obtenerUsadoAdm($idCompania));
+$disponible = money_format('%i',($presupuesto - $facturado - $usado));
+
 ?>
 <!-- Page content -->
 <div id="page-content">
@@ -33,7 +43,9 @@ $idCompania = $_SESSION['idCompania'];
           <!--  <div class="block-options pull-right">
                 <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Configuración"><i class="fa fa-cog"></i></a>
             </div> -->
-            <h2><strong>Todos</strong> Los Centros de Costo</h2> <a href="crearCentrosCosto.php"><i class="fa fa-plus"></i>Crear Nuevo Centros de Costo</a>
+            <h2><strong>Todos</strong> Los Centros de Costo</h2> <a href="crearCentrosCosto.php"><i class="fa fa-plus"></i>Crear Nuevo Centros de Costo</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>Presupuesto Administracion = <i class="label label-info">$<?php echo $presupuesto ?></i></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Facturado = <i class="label " style="background: #059aaf;">$<?php echo $facturado?></i></span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>Sin Facturar = <i class="label label-warning">$<?php echo $usado ?></i></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Disponible = <i class="label label-success">$<?php echo $disponible ?></i></span>
         </div>
         <!-- END All Orders Title -->
 

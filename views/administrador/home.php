@@ -56,6 +56,7 @@
                                           <input type="hidden" name="idUsuario" id="idUsuario" value="<?php echo $idUsuario ?>">
                                           <span id="mensaje_factura" class="hidden"></span>
                                           <span id="control_vencimiento" class="hidden"></span>
+                                          <span id="control_admin" class="hidden"></span>
                                           <center><img align="center" src="../dis/img/taxi.jpg"  class="chart" ></center>
                                       </div>
                                       <!-- END Web Server Content -->
@@ -117,7 +118,8 @@
       });
     });
   </script>
-
+  <script src="../dis/js/pages/conteoGastoAdmin.js"></script>
+  <script>$(function(){ conteoGastoAdmin.init(); });</script>
   <script src="../dis/js/pages/index.js"></script>
   <script>
       $(function() {
